@@ -47,7 +47,8 @@ class TicTacToeGame
         @board.update_board move[0], move[1], @player_2.move_profile
       end
       @moves.delete input_move
-      puts @board + '\n'
+      puts @board
+      puts
     end
   end
 end
