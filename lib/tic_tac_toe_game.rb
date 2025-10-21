@@ -62,6 +62,11 @@ class TicTacToeGame
     evaluate_game
   end
 
+  def evaluate_game
+    winner = @player_1.is_winner ? @player_1 : @player_2.is_winner ? @player_2 : ""
+    puts @player_1.is_winner == @player_2.is_winner ? "THE GAME IS A DRAW" : "THE WINNER IS #{winner}"
+  end
+
   private
   def winning_moves
     ["369", "159", "123", "789", "357", "456", "147", "258"]
