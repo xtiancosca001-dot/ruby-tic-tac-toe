@@ -12,7 +12,7 @@ class Player
 
   def move(position)
     raise 'Move not acceptable, only numbers are allowed (1-9)' unless (position.to_i.between?(1,9))
-    @moves << move_map[position]
+    @moves << position
     move_map[position]
   end
 
