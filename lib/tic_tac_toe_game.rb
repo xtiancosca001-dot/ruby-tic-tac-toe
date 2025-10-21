@@ -51,6 +51,11 @@ class TicTacToeGame
       puts
     end
   end
+
+  private
+  def winning_moves
+    ["369", "159", "123", "789", "357", "456", "147", "258"]
+  end
 end
 
 g = TicTacToeGame.new
