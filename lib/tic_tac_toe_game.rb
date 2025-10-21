@@ -40,21 +40,45 @@ class TicTacToeGame
         input_move = gets.chomp.to_i
         move = @player_1.move(input_move)
         @board.update_board move[0], move[1], @player_1.move_profile
+        if validate_moves(@player_1)
+          @player_1.is_winner = true
+          break
+        end
       else  
         puts "#{@player_2.name}'s TURN (o)"
         input_move = gets.chomp.to_i
         move = @player_2.move(input_move)
         @board.update_board move[0], move[1], @player_2.move_profile
+        if validate_moves(@player_2)
+          @player_2.is_winner = true
+          break
+        end
       end
       @moves.delete input_move
       puts @board
       puts
     end
+
+    evaluate_game
   end
 
   private
   def winning_moves
     ["369", "159", "123", "789", "357", "456", "147", "258"]
+  end
+
+  def validate_moves(player)
+    winning_moves.each do |winning_move|
+      common_move = ""
+      moves = winning_move.split("")
+      moves.each do |move|
+        player.moves.each do |player_move|
+          common_move += player_move.to_s if move == player_move.to_s && !common_move.include?(player_move.to_s)
+        end
+      end
+      return true if common_move == winning_move
+    end
+    return false
   end
 end
 
