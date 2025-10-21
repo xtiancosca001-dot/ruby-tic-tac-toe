@@ -1,9 +1,10 @@
 # Player Object Class File
 class Player
-  attr_accessor :name, :moves, :move_profile
+  attr_accessor :name, :moves, :move_profile, :is_winner
 
   def initialize(name, move_profile)
     @name = name
+    @is_winner = false
     raise "move_profile is not accepted (Entered #{move_profile}), acceptable: x / o" unless (move_profile == 'o' || move_profile == 'x')
     @move_profile = move_profile
     @moves = []
