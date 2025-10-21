@@ -16,6 +16,10 @@ class Player
     move_map[position]
   end
 
+  def to_s
+    "#{@name} (#{@move_profile})"
+  end
+
   def current_move
     @moves.last
   end
