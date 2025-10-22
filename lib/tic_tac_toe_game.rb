@@ -77,6 +77,7 @@ class TicTacToeGame
       puts "#{player_turn.name}'s TURN (#{player_turn.move_profile})"
 
       puts "MOVES LEFT: #{@moves}"
+      print "> Enter a number to move (type 'quit' to exit): "
       input_move = gets.chomp
       break if input_move == 'quit'
         
@@ -104,10 +105,10 @@ class TicTacToeGame
 
   def evaluate_game
     winner = @player_1.is_winner ? @player_1 : @player_2.is_winner ? @player_2 : ""
-    if @player_1.is_winner == @player_2.is_winner
+    if @player_1.is_winner == @player_2.is_winner && @moves.length == 0
       puts "THE GAME IS A DRAW"
     elsif @moves.length > 0 && !@player_1.is_winner && !@player_2.is_winner
-      puts "Player already quit the game. No winner!"
+      puts "Game is exited... No winner!"
     else
       puts "THE WINNER IS #{winner}"
     end
