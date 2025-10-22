@@ -132,5 +132,3 @@ class TicTacToeGame
     return false
   end
 end
-
-g = TicTacToeGame.new
