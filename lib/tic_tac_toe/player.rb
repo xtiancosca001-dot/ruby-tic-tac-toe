@@ -1,12 +1,13 @@
 # Player Object Class File
 class Player
-  attr_accessor :name, :moves, :move_profile, :is_winner
+  attr_accessor :name, :moves, :move_profile, :is_winner, :has_moved
 
   def initialize(name="", move_profile="")
     @name = name
     @is_winner = false
     @move_profile = move_profile
     @moves = []
+    @has_moved = false
   end
 
   def move(position)
