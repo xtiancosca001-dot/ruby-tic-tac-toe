@@ -5,10 +5,30 @@ class TicTacToeGame
   attr_accessor :player_1, :player_2
 
   def initialize
-    @player_1 = Player.new(nil, 'x')
-    @player_2 = Player.new(nil, 'o')
     @board = Board.new
     @moves = (1..9).to_a
+    setup_game
+  end
+
+  def get_player_info(player)
+    print "> Please enter player's name: "
+    player = Player.new
+    player_name = gets.chomp
+    player.name = player_name.empty? ? "PLAYER 1" : player_name
+    
+  end
+
+  def get_player_profiles
+    print "> Please enter player's move profile (x / o): "
+    player_move_profile = ""
+    puts "\nEnter a valid move profile for #{player.name} (acceptable: x / o)"
+    while player_move_profile != 'o' && player_move_profile != 'x'
+      print "> Move: "
+      player_move_profile = gets.chomp
+    end
+    player_2_move_profile = player_move_profile == 'x' ? 'o' : 'x'
+    puts "P1: #{player_move_profile} | P2: #{player_2_move_profile}"
+    [player_move_profile, player_2_move_profile]
   end
 
   def setup_game
@@ -16,13 +36,12 @@ class TicTacToeGame
     puts "=TIC TAC TOE="
     puts "=============\n"
 
-    # Player entry
-    print "> Please enter first player's name (x): "
-    player_1_name = gets.chomp
-    @player_1.name = player_1_name.empty? ? "PLAYER 1" : player_1_name
-    print "> Please enter second player's name (o): "
-    player_2_name = gets.chomp 
-    @player_2.name = player_2_name.empty? ? "PLAYER 2" : player_2_name
+    # Player 1 entry
+    puts "==PLAYER 1=="
+
+
+    # Player 2 entry
+    puts "==PLAYER 2=="
   end
 
   def to_s
