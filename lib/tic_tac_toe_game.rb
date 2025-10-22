@@ -118,7 +118,13 @@ class TicTacToeGame
 
   def evaluate_game
     winner = @player_1.is_winner ? @player_1 : @player_2.is_winner ? @player_2 : ""
-    puts @player_1.is_winner == @player_2.is_winner ? "THE GAME IS A DRAW" : "THE WINNER IS #{winner}"
+    if @player_1.is_winner == @player_2.is_winner
+      puts "THE GAME IS A DRAW"
+    elsif @moves.length > 0 && !@player_1.is_winner && !@player_2.is_winner
+      puts "Player already quit the game. No winner!"
+    else
+      puts "THE WINNER IS #{winner}"
+    end
   end
 
   private
