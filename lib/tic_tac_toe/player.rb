@@ -33,4 +33,9 @@ class Player
       [2,0], [2,1], [2,2]
     ]
   end
+
+  protected
+  def is_same_profile?(other_player)
+    self.move_profile == other_player.move_profile
+  end
 end
