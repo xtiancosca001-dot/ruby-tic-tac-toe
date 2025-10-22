@@ -113,7 +113,3 @@ class TicTacToeGame
 end
 
 g = TicTacToeGame.new
-puts g
-g.setup_game
-puts g
-g.begin_game
