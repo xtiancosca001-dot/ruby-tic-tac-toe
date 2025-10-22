@@ -21,10 +21,10 @@ class TicTacToeGame
 
   def set_player_profiles
     print "> Please enter player 1's profile (x / o): "
-    player_move_profile = ""
+    player_move_profile = ''
     puts "\nEnter a valid move profile (acceptable: x / o)"
     while player_move_profile != 'o' && player_move_profile != 'x'
-      print "> Move: "
+      print '> Move: '
       player_move_profile = gets.chomp
     end
     player_2_move_profile = player_move_profile == 'x' ? 'o' : 'x'
@@ -33,22 +33,22 @@ class TicTacToeGame
   end
 
   def setup_game
-    puts "============="
-    puts "=TIC TAC TOE="
+    puts '============='
+    puts '=TIC TAC TOE='
     puts "=============\n"
 
     # Player 1 entry
-    puts "==PLAYER 1=="
+    puts '==PLAYER 1=='
     @player_1 = Player.new
     set_player_info(@player_1)
 
     # Player 2 entry
-    puts "==PLAYER 2=="
+    puts '==PLAYER 2=='
     @player_2 = Player.new
     set_player_info(@player_2)
 
     # player profile
-    puts "==PLAYER PROFILE=="
+    puts '==PLAYER PROFILE=='
     player_profiles = set_player_profiles
     @player_1.move_profile, @player_2.move_profile = player_profiles
   end
@@ -65,12 +65,13 @@ class TicTacToeGame
   end
 
   def begin_game
-    puts "Select a number indicating the position of your move in the board below:"
+    puts 'Select a number indicating the position of your move in the board below:'
     puts @board
     puts
 
     has_one_winner = @player_1.is_winner || @player_2.is_winner
-    @player_1.has_moved, @player_2.has_moved = false, true
+    @player_1.has_moved = false
+    @player_2.has_moved = true
     while @moves.length > 0 && !has_one_winner
       player_1_turn = @player_2.has_moved
       player_turn = player_1_turn ? @player_1 : @player_2
@@ -80,49 +81,56 @@ class TicTacToeGame
       print "> Enter a number to move (type 'quit' to exit): "
       input_move = gets.chomp
       break if input_move == 'quit'
-        
-      if input_move.to_i.between?(1,9) && @moves.include?(input_move.to_i)
+
+      if input_move.to_i.between?(1, 9) && @moves.include?(input_move.to_i)
         if player_1_turn
           get_player_move(@player_1, input_move.to_i)
-          @player_1.has_moved, @player_2.has_moved = true, false
+          @player_1.has_moved = true
+          @player_2.has_moved = false
         else
           get_player_move(@player_2, input_move.to_i)
-          @player_1.has_moved, @player_2.has_moved = false, true
+          @player_1.has_moved = false
+          @player_2.has_moved = true
         end
       elsif input_move.to_i == 0 || input_move.to_i > 9
-        puts "INVALID MOVE! Please try again. (accepted: 1-9)"
+        puts 'INVALID MOVE! Please try again. (accepted: 1-9)'
       elsif !@moves.include?(input_move)
-        puts "Move already done. Try another move."
+        puts 'Move already done. Try another move.'
       end
 
       puts @board
       puts
-      break if (@player_1.is_winner || @player_2.is_winner)
-      
+      break if @player_1.is_winner || @player_2.is_winner
+
     end
     evaluate_game
   end
 
   def evaluate_game
-    winner = @player_1.is_winner ? @player_1 : @player_2.is_winner ? @player_2 : ""
+    winner = if @player_1.is_winner
+               @player_1
+             else
+               @player_2.is_winner ? @player_2 : ''
+             end
     if @player_1.is_winner == @player_2.is_winner && @moves.length == 0
-      puts "THE GAME IS A DRAW"
+      puts 'THE GAME IS A DRAW'
     elsif @moves.length > 0 && !@player_1.is_winner && !@player_2.is_winner
-      puts "Game is exited... No winner!"
+      puts 'Game is exited... No winner!'
     else
       puts "THE WINNER IS #{winner}"
     end
   end
 
   private
+
   def winning_moves
-    ["369", "159", "123", "789", "357", "456", "147", "258"]
+    %w[369 159 123 789 357 456 147 258]
   end
 
   def validate_moves(player)
     winning_moves.each do |winning_move|
-      common_move = ""
-      moves = winning_move.split("")
+      common_move = ''
+      moves = winning_move.split('')
       moves.each do |move|
         player.moves.each do |player_move|
           common_move += player_move.to_s if move == player_move.to_s && !common_move.include?(player_move.to_s)
@@ -130,6 +138,6 @@ class TicTacToeGame
       end
       return true if common_move == winning_move
     end
-    return false
+    false
   end
 end
