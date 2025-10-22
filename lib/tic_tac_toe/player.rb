@@ -21,12 +21,6 @@ class Player
     "#{@name} (#{@move_profile})"
   end
 
-  def current_move
-    @moves.last
-  end
-
-  # TODO: Figure out a way to save a winner flag for a player
-
   private
 
   def move_map
@@ -35,11 +29,5 @@ class Player
       [1, 0], [1, 1], [1, 2],
       [2, 0], [2, 1], [2, 2]
     ]
-  end
-
-  protected
-
-  def is_same_profile?(other_player)
-    move_profile == other_player.move_profile
   end
 end
