@@ -4,11 +4,10 @@ require_relative 'tic_tac_toe/player'
 class TicTacToeGame
   attr_accessor :player_1, :player_2
 
-  @@players = 0
-
   def initialize
     @board = Board.new
     @moves = (1..9).to_a
+    @players = 0
     setup_game
     begin_game
   end
@@ -16,8 +15,8 @@ class TicTacToeGame
   def set_player_info(player)
     print "> Please enter player's name: "
     player_name = gets.chomp
-    @@players += 1
-    player.name = player_name.empty? ? "PLAYER #{@@players}" : player_name
+    @players += 1
+    player.name = player_name.empty? ? "PLAYER #{@players}" : player_name
   end
 
   def set_player_profiles
