@@ -18,9 +18,9 @@ class TicTacToeGame
   end
 
   def set_player_profiles
-    print "> Please enter player's move profile (x / o): "
+    print "> Please enter player 1's profile (x / o): "
     player_move_profile = ""
-    puts "\nEnter a valid move profile for #{player.name} (acceptable: x / o)"
+    puts "\nEnter a valid move profile (acceptable: x / o)"
     while player_move_profile != 'o' && player_move_profile != 'x'
       print "> Move: "
       player_move_profile = gets.chomp
@@ -37,10 +37,17 @@ class TicTacToeGame
 
     # Player 1 entry
     puts "==PLAYER 1=="
-
+    @player_1 = Player.new
+    set_player_info(@player_1)
 
     # Player 2 entry
     puts "==PLAYER 2=="
+    @player_2 = Player.new
+    set_player_info(@player_2)
+
+    # player profile
+    player_profiles = set_player_profiles
+    @player_1.move_profile, @player_2.move_profile = player_profiles
   end
 
   def to_s
