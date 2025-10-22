@@ -54,7 +54,7 @@ class TicTacToeGame
   end
 
   def to_s
-    "Player 1 (x): #{@player_1.name} | Player 2 (o): #{@player_2.name}"
+    "Player 1 (#{@player_1.move_profile}): #{@player_1.name} | Player 2 (#{@player_2.move_profile}): #{@player_2.name}"
   end
 
   def get_player_move(player, input_move)
