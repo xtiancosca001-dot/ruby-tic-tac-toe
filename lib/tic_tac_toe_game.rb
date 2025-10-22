@@ -46,12 +46,21 @@ class TicTacToeGame
     set_player_info(@player_2)
 
     # player profile
+    puts "==PLAYER PROFILE=="
     player_profiles = set_player_profiles
     @player_1.move_profile, @player_2.move_profile = player_profiles
   end
 
   def to_s
     "Player 1 (x): #{@player_1.name} | Player 2 (o): #{@player_2.name}"
+  end
+
+  def get_player_move(player)
+    puts "#{player.name}'s TURN (#{player.move_profile})"
+    input_move = gets.chomp.to_i
+    move = player.move(input_move)
+    @board.update_board move[0], move[1], player.move_profile
+    player.is_winner = true if validate_moves(player)
   end
 
   def begin_game
@@ -61,24 +70,11 @@ class TicTacToeGame
     1.upto(9) do |turn|
       puts "MOVES LEFT: #{@moves}"
       unless turn % 2 == 0
-        puts "#{@player_1.name}'s TURN (x)"
-        input_move = gets.chomp.to_i
-        move = @player_1.move(input_move)
-        @board.update_board move[0], move[1], @player_1.move_profile
-        if validate_moves(@player_1)
-          @player_1.is_winner = true
-          break
-        end
+        get_player_move(@player_1)
       else  
-        puts "#{@player_2.name}'s TURN (o)"
-        input_move = gets.chomp.to_i
-        move = @player_2.move(input_move)
-        @board.update_board move[0], move[1], @player_2.move_profile
-        if validate_moves(@player_2)
-          @player_2.is_winner = true
-          break
-        end
+        get_player_move(@player_2)
       end
+      break if @player_1.is_winner || @player_2.is_winner
       @moves.delete input_move
       puts @board
       puts
