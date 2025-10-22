@@ -10,15 +10,14 @@ class TicTacToeGame
     setup_game
   end
 
-  def get_player_info(player)
+  def set_player_info(player)
     print "> Please enter player's name: "
     player = Player.new
     player_name = gets.chomp
     player.name = player_name.empty? ? "PLAYER 1" : player_name
-    
   end
 
-  def get_player_profiles
+  def set_player_profiles
     print "> Please enter player's move profile (x / o): "
     player_move_profile = ""
     puts "\nEnter a valid move profile for #{player.name} (acceptable: x / o)"
