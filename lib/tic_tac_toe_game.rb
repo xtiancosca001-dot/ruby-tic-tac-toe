@@ -100,19 +100,6 @@ class TicTacToeGame
       break if (@player_1.is_winner || @player_2.is_winner)
       
     end
-    # 1.upto(9) do |turn|
-    #   puts "MOVES LEFT: #{@moves}"
-    #   input_move = gets.chomp.to_i 
-    #   unless turn % 2 == 0
-    #     get_player_move(@player_1, input_move)
-    #   else  
-    #     get_player_move(@player_2, input_move)
-    #   end
-    #   puts @board
-    #   puts
-    #   break if @player_1.is_winner || @player_2.is_winner
-    # end
-
     evaluate_game
   end
 
