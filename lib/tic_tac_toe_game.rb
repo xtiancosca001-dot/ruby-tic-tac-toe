@@ -72,7 +72,7 @@ class TicTacToeGame
     has_one_winner = @player_1.is_winner || @player_2.is_winner
     @player_1.has_moved = false
     @player_2.has_moved = true
-    while @moves.length > 0 && !has_one_winner
+    while @moves.length.positive? && !has_one_winner
       player_1_turn = @player_2.has_moved
       player_turn = player_1_turn ? @player_1 : @player_2
       puts "#{player_turn.name}'s TURN (#{player_turn.move_profile})"
@@ -92,7 +92,7 @@ class TicTacToeGame
           @player_1.has_moved = false
           @player_2.has_moved = true
         end
-      elsif input_move.to_i == 0 || input_move.to_i > 9
+      elsif input_move.to_i.zero? || input_move.to_i > 9
         puts 'INVALID MOVE! Please try again. (accepted: 1-9)'
       elsif !@moves.include?(input_move)
         puts 'Move already done. Try another move.'
@@ -112,9 +112,9 @@ class TicTacToeGame
              else
                @player_2.is_winner ? @player_2 : ''
              end
-    if @player_1.is_winner == @player_2.is_winner && @moves.length == 0
+    if @player_1.is_winner == @player_2.is_winner && @moves.empty?
       puts 'THE GAME IS A DRAW'
-    elsif @moves.length > 0 && !@player_1.is_winner && !@player_2.is_winner
+    elsif @moves.length.positive? && !@player_1.is_winner && !@player_2.is_winner
       puts 'Game is exited... No winner!'
     else
       puts "THE WINNER IS #{winner}"
@@ -130,7 +130,7 @@ class TicTacToeGame
   def validate_moves(player)
     winning_moves.each do |winning_move|
       common_move = ''
-      moves = winning_move.split('')
+      moves = winning_move.chars
       moves.each do |move|
         player.moves.each do |player_move|
           common_move += player_move.to_s if move == player_move.to_s && !common_move.include?(player_move.to_s)
