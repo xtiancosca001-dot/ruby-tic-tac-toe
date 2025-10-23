@@ -8,8 +8,11 @@ about object-oriented programming.
 - Make sure you are inside the folder for this game. i.e. `path/to/ruby-tic-tac-toe` and make sure `ruby 3.4.2` is installed on your machine.
 - Clone this repository to your current working directory i.e.
 ```
-git clone https://github.com/xtiancosca001-dot/ruby-tic-tac-toe.git (for https - Personal Access Token is required)
-git clone git@github.com:xtiancosca001-dot/ruby-tic-tac-toe.git (for ssh - your device public key (ssh-rsa) is required)
+HTTPS (Requires Personal Access Token):
+- git clone https://github.com/xtiancosca001-dot/ruby-tic-tac-toe.git
+
+SSH (Requires ssh-rsa or public key):
+- git clone git@github.com:xtiancosca001-dot/ruby-tic-tac-toe.git 
 ```
 - To start playing, run the following on your terminal:
 ```
