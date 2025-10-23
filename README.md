@@ -9,7 +9,7 @@ about object-oriented programming.
 - Clone this repository to your current working directory i.e.
 ```
 git clone https://github.com/xtiancosca001-dot/ruby-tic-tac-toe.git (for https - Personal Access Token is required)
-git@github.com:xtiancosca001-dot/ruby-tic-tac-toe.git (for ssh - your device public key (ssh-rsa) is required)
+git clone git@github.com:xtiancosca001-dot/ruby-tic-tac-toe.git (for ssh - your device public key (ssh-rsa) is required)
 ```
 - To start playing, run the following on your terminal:
 ```
