@@ -2,7 +2,7 @@ require_relative 'tic_tac_toe/board'
 require_relative 'tic_tac_toe/player'
 
 class TicTacToeGame
-  attr_accessor :player_1, :player_2
+  attr_writer :player1, :player2
 
   def initialize
     @board = Board.new
@@ -27,9 +27,9 @@ class TicTacToeGame
       print '> Move: '
       player_move_profile = gets.chomp
     end
-    player_2_move_profile = player_move_profile == 'x' ? 'o' : 'x'
-    puts "P1: #{player_move_profile} | P2: #{player_2_move_profile}"
-    [player_move_profile, player_2_move_profile]
+    player2_move_profile = player_move_profile == 'x' ? 'o' : 'x'
+    puts "P1: #{player_move_profile} | P2: #{player2_move_profile}"
+    [player_move_profile, player2_move_profile]
   end
 
   def setup_game
@@ -39,22 +39,22 @@ class TicTacToeGame
 
     # Player 1 entry
     puts '==PLAYER 1=='
-    @player_1 = Player.new
-    set_player_info(@player_1)
+    @player1 = Player.new
+    set_player_info(@player1)
 
     # Player 2 entry
     puts '==PLAYER 2=='
-    @player_2 = Player.new
-    set_player_info(@player_2)
+    @player2 = Player.new
+    set_player_info(@player2)
 
     # player profile
     puts '==PLAYER PROFILE=='
     player_profiles = set_player_profiles
-    @player_1.move_profile, @player_2.move_profile = player_profiles
+    @player1.move_profile, @player2.move_profile = player_profiles
   end
 
   def to_s
-    "Player 1 (#{@player_1.move_profile}): #{@player_1.name} | Player 2 (#{@player_2.move_profile}): #{@player_2.name}"
+    "Player 1 (#{@player1.move_profile}): #{@player1.name} | Player 2 (#{@player2.move_profile}): #{@player2.name}"
   end
 
   def get_player_move(player, input_move)
@@ -69,12 +69,12 @@ class TicTacToeGame
     puts @board
     puts
 
-    has_one_winner = @player_1.is_winner || @player_2.is_winner
-    @player_1.has_moved = false
-    @player_2.has_moved = true
+    has_one_winner = @player1.is_winner || @player2.is_winner
+    @player1.has_moved = false
+    @player2.has_moved = true
     while @moves.length.positive? && !has_one_winner
-      player_1_turn = @player_2.has_moved
-      player_turn = player_1_turn ? @player_1 : @player_2
+      player1_turn = @player2.has_moved
+      player_turn = player1_turn ? @player1 : @player2
       puts "#{player_turn.name}'s TURN (#{player_turn.move_profile})"
 
       puts "MOVES LEFT: #{@moves}"
@@ -83,14 +83,14 @@ class TicTacToeGame
       break if input_move == 'quit'
 
       if input_move.to_i.between?(1, 9) && @moves.include?(input_move.to_i)
-        if player_1_turn
-          get_player_move(@player_1, input_move.to_i)
-          @player_1.has_moved = true
-          @player_2.has_moved = false
+        if player1_turn
+          get_player_move(@player1, input_move.to_i)
+          @player1.has_moved = true
+          @player2.has_moved = false
         else
-          get_player_move(@player_2, input_move.to_i)
-          @player_1.has_moved = false
-          @player_2.has_moved = true
+          get_player_move(@player2, input_move.to_i)
+          @player1.has_moved = false
+          @player2.has_moved = true
         end
       elsif input_move.to_i.zero? || input_move.to_i > 9
         puts 'INVALID MOVE! Please try again. (accepted: 1-9)'
@@ -100,21 +100,21 @@ class TicTacToeGame
 
       puts @board
       puts
-      break if @player_1.is_winner || @player_2.is_winner
+      break if @player1.is_winner || @player2.is_winner
 
     end
     evaluate_game
   end
 
   def evaluate_game
-    winner = if @player_1.is_winner
-               @player_1
+    winner = if @player1.is_winner
+               @player1
              else
-               @player_2.is_winner ? @player_2 : ''
+               @player2.is_winner ? @player2 : ''
              end
-    if @player_1.is_winner == @player_2.is_winner && @moves.empty?
+    if @player1.is_winner == @player2.is_winner && @moves.empty?
       puts 'THE GAME IS A DRAW'
-    elsif @moves.length.positive? && !@player_1.is_winner && !@player_2.is_winner
+    elsif @moves.length.positive? && !@player1.is_winner && !@player2.is_winner
       puts 'Game is exited... No winner!'
     else
       puts "THE WINNER IS #{winner}"
